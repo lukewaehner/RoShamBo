@@ -2,71 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" constent="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <input type="Text" id="playerChoice" />
-    <button onclick="playRound()">Enter Move</button>
-    <p>Wins: <span id="winsCount">0</span></p>
-    <p>computerChoice: <span id="compChoice">N/A</span></p>
-    <button onclick="reset()">Play Game</button>
-    <p><span id="decision"></span></p>
-    <script>
-      //vars
-      let wins = 0;
-      let played = 0;
-      //comp choice
-      function getComputerChoice() {
-        RandomVar = Math.floor(Math.random() * 3) + 1;
-        const RPS = {
-          1: "Rock",
-          2: "Paper",
-          3: "Scissors",
-        };
-        return RPS[RandomVar];
-      }
-      function playRound() {
-        console.log("Execute Round");
-        let playerChoice = document.getElementById("playerChoice").value.trim();
-        let computerChoice = getComputerChoice();
-        document.getElementById("compChoice").innerHTML = computerChoice;
-        if (playerChoice === computerChoice) {
-          document.getElementById("decision").innerHTML = "Tie!";
-          return;
-        } else if (
-          (playerChoice.toLowerCase() === "rock" &&
-            computerChoice === "Scissors") ||
-          (playerChoice.toLowerCase() === "paper" &&
-            computerChoice === "Rock") ||
-          (playerChoice.toLowerCase() === "scissors" &&
-            computerChoice === "Paper")
-        ) {
-          wins++;
-          played++;
-          document.getElementById("decision").innerHTML = "You Win!";
-          checkOver();
-        } else {
-          played++;
-          document.getElementById("decision").innerHTML = "You Lose!";
-          checkOver();
-        }
-      }
-      function checkOver() {
-        console.log("Wins: " + wins);
-        document.getElementById("winsCount").innerHTML = wins;
-        console.log("Played: " + played);
-        if (played > 4) {
-          reset();
-        }
-      }
-      function reset() {
-        wins = 0;
-        played = 0;
-        console.log("Reset");
-        document.getElementById("winsCount").innerHTML = wins;
-        document.getElementById("compChoice").innerHTML = "N/A";
-      }
-    </script>
+    <div id="slide1" class="slides">
+      <a href="https://github.com/lukewaehner/" id="TAG">Luke Waehner</a>
+      <h1>Rock Paper Scissors</h1>
+      <ul id="Moves">
+        <img
+          src="./assets/rps-rock.jpg"
+          id="rock"
+          class="permanentAsset"
+          onclick="flipToNextSlide()"
+        />
+        <img
+          src="./assets/rps-paper.jpg"
+          id="paper"
+          class="permanentAsset"
+          onclick="flipToNextSlide()"
+        />
+        <img
+          src="./assets/rps-scissors.jpg"
+          id="scissors"
+          class="permanentAsset"
+          onclick="flipToNextSlide()"
+        />
+      </ul>
+    </div>
+    <div id="slide2" class="slides">
+      <h1 id="outcome"></h1>
+      <div class="playScreen"></div>
+      <div id="scorecard">
+        <p>Wins: <span id="winCard">0</span></p>
+        <p>Losses: <span id="lossCard">0</span></p>
+        <p>Ties: <span id="tieCard">0</span></p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
